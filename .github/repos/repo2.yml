@@ -1,0 +1,38 @@
+# The following attributes are applied to any repo within the org
+# So if a repo is not listed above is created or edited
+# The app will apply the following settings to it
+labels:
+  # Labels: define labels for Issues and Pull Requests
+  include:
+    - name: question
+      # If including a `#`, make sure to wrap it with quotes!
+      color: "#3333bb"
+      description: Community question
+
+# Collaborators: give specific users access to any repository.
+# See https://docs.github.com/en/rest/collaborators/collaborators?apiVersion=2026-03-10#add-a-repository-collaborator for available options
+# The permission to grant the collaborator. Can be one of:
+# * `pull` - can pull, but not push to or administer this repository.
+# * `push` - can pull and push, but not administer this repository.
+# * `admin` - can pull, push and administer this repository.
+collaborators:
+  - username: j-matheron
+    permission: admin
+
+# Branch protection rules
+# See https://docs.github.com/en/rest/branches/branch-protection?apiVersion=2026-03-10#update-branch-protection for available options
+branches:
+  # If the name of the branch value is specified as `default`, then the app will create a branch protection rule to apply against the default branch in the repo
+  - name: default
+    protection:
+      # Required. Require at least one approving review on a pull request, before merging. Set to null to disable.
+      required_pull_request_reviews:
+        bypass_pull_request_allowances:
+          users: [jorisv, j-matheron]
+        # Specify which users and teams can dismiss pull request reviews. Pass an empty dismissal_restrictions object to disable. User and team dismissal_restrictions are only available for organization-owned repositories. Omit this parameter for personal repositories.
+        dismissal_restrictions:
+          users: [jorisv, j-matheron]
+      # Required. Restrict who can push to this branch. Team and user restrictions are only available for organization-owned repositories. Set to null to disable.
+      restrictions:
+        users: [jorisv, j-matheron]
+
